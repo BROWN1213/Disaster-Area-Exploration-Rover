@@ -1,1 +1,1 @@
-# Disaster-Area-Explorartion-Rover
+# Disaster-Area-Exploration-Rover
