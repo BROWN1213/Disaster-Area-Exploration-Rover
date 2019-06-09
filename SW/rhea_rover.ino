@@ -39,11 +39,5 @@ void loop() {
   Serial.println("Loop Passed");
   //Serial.println("dd");
   
-  
-  //Serial.println("Rover GPS test");
-
-//      if (Serial.available()) {
-//        Serial.write(Serial.read());
-//      }
 
 }

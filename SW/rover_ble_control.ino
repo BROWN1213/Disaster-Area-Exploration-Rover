@@ -1,3 +1,4 @@
+/*
 #define J_MIN 0
 #define J_MAX 100
 #define J_STEP 25
@@ -104,3 +105,4 @@ void loopJoystick(){
   
 
 }
+*/

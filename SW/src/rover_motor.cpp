@@ -174,31 +174,27 @@ void RoverMotor::calculateTargetDeg(int radius_joy,float *wh_angle ){
   
 
 }
-
 void RoverMotor::cornerPosControl(float *target_degree){
-  //0~100 map
-
-  //move(11,)
+  int wh_ang[4];
+  for(int i=0;i<4;i++){
+    wh_ang[i]=(int)(target_degree[i]*0.24+500);
+  }
+  //Move(11,wh_ang[0],1);
+  //Move(33,wh_ang[1],1);
+  //Move(44,wh_ang[2],1);
+  Move(66,wh_ang[3],1);
+  
 }
 
 void RoverMotor::wheelVelocityControl(float *velocity_wheel){
-  /*
-  for(int i=1;i<7;i++){
-    map(velocity_wheel[i-1],-100,100,-1000,1000);
-    SetMode(i,1,velocity_wheel[i-1]);
+  // wheel ID : 1~6
+  int wh_vel[6];
+  for(int i=0;i<3;i++){
+    wh_vel[i]=-(int)map(velocity_wheel[i],-100,100,-1000,1000);
+    SetMode(i+1,1,wh_vel[i]);
   }
-  */
-    // wheel ID : 1~6
-    int wh_vel[6];
-    for(int i=0;i<3;i++){
-      wh_vel[i]=-(int)map(velocity_wheel[i],-100,100,-1000,1000);
-      SetMode(i+1,1,wh_vel[i]);
-    }
-    for(int i=3;i<6;i++){
-      wh_vel[i]=(int)map(velocity_wheel[i],-100,100,-1000,1000);
-      SetMode(i+1,1,wh_vel[i]);
-    }
-
-  
-    SetID(55,56);
+  for(int i=3;i<6;i++){
+    wh_vel[i]=(int)map(velocity_wheel[i],-100,100,-1000,1000);
+    SetMode(i+1,1,wh_vel[i]);
+  }
 }
