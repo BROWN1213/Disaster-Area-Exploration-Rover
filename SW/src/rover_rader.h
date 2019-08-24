@@ -4,12 +4,12 @@
 
 class RoverRader{
     public:
-      RoverRader(Servo servo,int servo_pin);
-      void raderServo(int servo_pin, float steer_angle);
+      RoverRader(Servo servo,int servo_pin,float steer_angle);
+      
 
     
     private:
-   
+      Servo _servo;
       
 };
 
