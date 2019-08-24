@@ -4,12 +4,16 @@
 #include "src/rover_ahrs.h"
 #include "src/rover_Lx16A.h"
 #include "src/rover_motor.h"
+<<<<<<< HEAD
 #include "src/rover_rader.h"
 #include <SimpleTimer.h>
 #include <Servo.h>
 
 SimpleTimer timer; 
 
+=======
+ 
+>>>>>>> a97e8684471eef05192859955b55e6e15fb25925
 /* software serial pin map */
 // GPS : 10,11
 // BLE : 4,5
