@@ -4,6 +4,8 @@
 #include "src/rover_ahrs.h"
 #include "src/rover_Lx16A.h"
 #include "src/rover_motor.h"
+#include "src/rover_rader.h"
+#include <Servo.h>
 
 /* software serial pin map */
 // GPS : 10,11
