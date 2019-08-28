@@ -71,15 +71,18 @@ class RoverLx16A{
         void StopMove(uint8_t id);
         void SetID(uint8_t oldID, uint8_t newID);
         int GetID(uint8_t ID);
-        void OffsetAdjust(uint8_t id, int16_t offsetpos);
-        void Offsetwrite(uint8_t id, int16_t offsetpos);
-        void OffsetRead(uint8_t id);
+        
         void SetMode(uint8_t id, uint8_t Mode, int16_t Speed);
         void Load(uint8_t id);
         void Unload(uint8_t id);
         int LobotSerialServoReceiveHandle(byte *ret);
         int ReadPosition(uint8_t id);
         int ReadVin(uint8_t id);
+        void LedCTRL(uint8_t ID, uint8_t onoff);
+        int ReadTemp(uint8_t id);
+        void OffsetAdjust(uint8_t id, int16_t offsetpos);
+        void Offsetwrite(uint8_t id, int16_t offsetpos);
+        void OffsetRead(uint8_t id);        
     private:
         Stream* SerialX;
         bool    conn;

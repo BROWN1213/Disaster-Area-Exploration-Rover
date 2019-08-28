@@ -41,9 +41,11 @@ class RoverGPS
          bool parsed = false;
          char c;
          //this->stream.RxModePortSet(RxMode_GPS_PORT);
-         numc = stream.available();
-           while (numc--) {
+        // numc = stream.available();
+        //while (numc--) {
+        while(stream.available()>0){      
                c=stream.read(); //read 1 Byte
+               //Serial.write(c);  // debuging
                if (decode(c)) {
                    parsed = true;
                }

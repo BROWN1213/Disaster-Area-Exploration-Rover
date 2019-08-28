@@ -8,20 +8,25 @@
 */
 
 #include "rover_ultrasonic.h"
-
+#include "rover_debug.h"
 #include "Arduino.h"
 
 
 RoverUltraSonic::RoverUltraSonic(int trigPin, int echoPin)
 {
-  pinMode(trigPin, OUTPUT);
-  pinMode(echoPin, INPUT);
   _trigPin = trigPin;
   _echoPin = echoPin;
 }
+void RoverUltraSonic::begin(){
+
+  pinMode(_trigPin, OUTPUT);
+  pinMode(_echoPin, INPUT);
+}
+
 
 float RoverUltraSonic::measureDistance()
 {
+  float distance;
   digitalWrite(_trigPin, LOW);
   digitalWrite(_echoPin, LOW);
   delayMicroseconds(2);
@@ -30,23 +35,23 @@ float RoverUltraSonic::measureDistance()
 
   unsigned long duration = pulseIn(_echoPin, HIGH); 
   // HIGH 였을 때 시간(초음파가 보냈다가 다시 들어온 시간)을 가지고 거리를 계산 한다.
-  _distance = ((float)(340.0 * duration) / 10000.0) / 2.0;  
-  return _distance;
+  distance = ((float)(340.0 * duration) / 10000.0) / 2.0;  
+  return distance;
 }
 
-bool RoverUltraSonic::isDistanceInArea(unsigned long distance_cm, bool verbose)
-{
+// bool RoverUltraSonic::isDistanceInArea(unsigned long distance_cm, bool verbose)
+// {
   
-  if(_distance < distance_cm){
+//   if(_distance < distance_cm){
 
-    if(verbose)Serial.println("too close");
-    return true;
-  }else{
-    if(verbose)Serial.println("not dangerous");
-    return false;
-  }
-  //turn around
+//     if(verbose)ROVER_LOG("too close");
+//     return true;
+//   }else{
+//     if(verbose)ROVER_LOG("not dangerous");
+//     return false;
+//   }
+//   //turn around
   
   
-}
+// }
 

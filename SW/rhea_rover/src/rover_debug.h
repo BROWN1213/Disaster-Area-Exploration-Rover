@@ -27,7 +27,7 @@ typedef uint32_t millis_time_t;
 #include <avr/pgmspace.h>
 
 
-
+#define ROVER_PRINT Serial
 
 // Diagnostic defines
 
@@ -46,10 +46,22 @@ typedef uint32_t millis_time_t;
 
 #ifdef ROVER_PRINT
 
-    #define ROVER_LOG(msg)  {ROVER_PRINT.print('[');ROVER_PRINT.print(millis());ROVER_PRINT.print(F("] ")); ROVER_PRINT.println(F(msg));   }
+    #define ROVER_LOG(msg)  {ROVER_LOG_TIME(); ROVER_PRINT.println(F(msg));   }
 
     #define ROVER_ASSERT(expr) { if(!(expr)) { ROVER_LOG("Assertion failed."); ROVER_DBG_BREAK()} }
+    
+    #define ROVER_LOG1(p1)            { ROVER_LOG_TIME(); ROVER_PRINT.println(p1); }
+    #define ROVER_LOG2(p1,p2)         { ROVER_LOG_TIME(); ROVER_PRINT.print(p1); ROVER_PRINT.print(F(",")); ROVER_PRINT.println(p2); }
+    #define ROVER_LOG3(p1,p2,p3)      { ROVER_LOG_TIME(); ROVER_PRINT.print(p1); ROVER_PRINT.print(F(",")); ROVER_PRINT.print(p2); ROVER_PRINT.print(F(",")); ROVER_PRINT.println(p3); }
+    #define ROVER_LOG4(p1,p2,p3,p4)   { ROVER_LOG_TIME(); ROVER_PRINT.print(p1); ROVER_PRINT.print(F(",")); ROVER_PRINT.print(p2); ROVER_PRINT.print(F(",")); ROVER_PRINT.print(p3); ROVER_PRINT.print(F(","));ROVER_PRINT.println(p4); }
 
+
+        static
+        void ROVER_LOG_TIME() {
+            ROVER_PRINT.print(F("[ "));
+            ROVER_PRINT.print(millis());
+            ROVER_PRINT.print(F(" ] "));
+        }
 
 #ifdef ROVER_DEBUG
         #define ROVER_DBG_DUMP(msg, addr, len) if (len) { ROVER_PRINT.print(F(msg)); ROVER_PRINT.write((uint8_t*)addr, len); ROVER_PRINT.println(); }
