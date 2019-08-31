@@ -17,7 +17,7 @@ class RoverUltraSonic
   public:
     RoverUltraSonic(int trigPin, int echoPin);
     float measureDistance();
-    bool isDistanceInArea(unsigned long distance_cm , bool verbose);
+    bool isDistanceInArea(float distance,unsigned long distance_cm , bool verbose);
     
   
   private:
