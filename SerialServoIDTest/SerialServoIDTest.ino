@@ -11,7 +11,7 @@
 #define LOBOT_SERVO_ID_WRITE             13
 #define LOBOT_SERVO_ID_READ              14
 #define LOBOT_DEBUG 1
-
+   
 SoftwareSerial mySerial(10,11); //(Rx,Tx)
 
 void setup() {
