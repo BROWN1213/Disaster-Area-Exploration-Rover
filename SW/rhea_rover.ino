@@ -17,7 +17,7 @@ Servo radar_servo;
 // BLE : 4,5
 // Lx16A : 6,7
 int id;
-int joy_velocity=0,joy_raduis=0;
+int joy_velocity=0, joy_raduis=0;
 int v=0;
 float distance;
 float steer_angle=90.;
@@ -35,7 +35,7 @@ void setup() {
   Serial.println("Setup Complete!");
   //setupJoystick();
   
-  int timerId = timer.setInterval(700, timers); 
+  int radar_timerId = timer.setInterval(700, timers);  
   steer_angle=60.;
 }
 void timers(){
