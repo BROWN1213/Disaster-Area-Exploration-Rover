@@ -11,7 +11,8 @@
 #define SERVO_PIN 3
 
 SimpleTimer timer; 
-Servo radar_servo;
+Servo radar_servoFront;
+Servo radar_servoBack;
 /* software serial pin map */
 // GPS : 10,11
 // BLE : 4,5
@@ -19,7 +20,8 @@ Servo radar_servo;
 int id;
 int joy_velocity=0, joy_raduis=0;
 int v=0;
-float distance;
+bool isFront;
+
 float steer_angle=90.;
 
 void setup() {
@@ -52,7 +54,6 @@ void loop() {
   //setupRoverGps();
   //for(int angle = 60;angle<151;angle = angle+10){
     //steer_angle = angle;
-    
     timer.run();
  // }
   //Serial.println("Loop Start");
