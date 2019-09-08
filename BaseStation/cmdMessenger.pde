@@ -46,18 +46,31 @@ void setupDelta(){
      .setSize(20)
      .setText("CAMDOWN")
      ;     
+  cp5.addButton("saving")
+     .setPosition(860,660)
+     .setSize(100,50)
+     .setValue(0)
+     .activateBy(ControlP5.RELEASE);
+     ;
+  cp5.getController("saving")
+     .getCaptionLabel()
+     .setFont(font)
+     .toUpperCase(false)
+     .setSize(20)
+     .setText("SAVE")
+     ;     
   cmdFirst=true;
 }
 
 void cmdcontrolEvent(ControlEvent theEvent) 
-{//
+{
   
   if(cmdFirst) {
 
     if(theEvent.getController().getName()=="camup")sendCmdMessege("w");
     if(theEvent.getController().getName()=="cammid")sendCmdMessege("s");
     if(theEvent.getController().getName()=="camdown")sendCmdMessege("x");
-
+    if(theEvent.getController().getName()=="saving")saveLog();
   }
 }
 void sendCmdMessege(String cmd){

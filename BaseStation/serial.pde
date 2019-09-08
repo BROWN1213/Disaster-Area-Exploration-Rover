@@ -1,4 +1,8 @@
+String roll,pitch,yaw;
+//imu ok gps ok pm2.5 radar cam ......
 void setupSerial(){
+  
+  
   cp5 = new ControlP5(this);
 
   menu1 = cp5.addDropdownList("port")
@@ -63,3 +67,51 @@ void reConnect(){
     myPort.write(cmd);  
     delay(1000);
 }
+
+void serialEvent(Serial port) //Reading the datas by Processing.
+{
+   String input = port.readStringUntil('\n');
+   //println(input);
+   appendSerialLog(input);
+   
+  if(input.indexOf("%") == 0){ //header
+     input=input.substring(2,input.length()-2); 
+     //println(input);
+     input = trim(input);
+     String[] values = split(input, ",");
+     //values[0]: class, values[1]: num, 
+      if(int(values[0])==1){ //IMU
+      
+        roll=values[2];
+        pitch=values[3];
+        yaw=values[4];
+      
+        //print("[");print(millis());print("]");
+        //print(roll);print(",");
+        //print(pitch);print(",");
+        //println(yaw);
+        //print("[");print(millis());print("]");
+        //print(float(values[5]));print(",");
+        //print(float(values[6]));print(",");
+        //println(float(values[7]));
+
+        appendImuLog();
+      }
+      if(int(values[0])==2){ //GPS
+        lat=values[2];
+        lng=values[3];
+        alt=values[4];
+        num_sat=values[5];
+        //speed_ms=float(values[6];
+        //course=values[7]);
+        
+        //gps_new_messege=true; //
+
+        print("[");print(millis());print("gps");print("]");
+        print(lat);print(",");
+        print(lng);print(",");
+        println(alt);
+        appendGpsLog();
+      }
+    }
+  }
