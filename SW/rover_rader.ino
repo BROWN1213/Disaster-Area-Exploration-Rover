@@ -27,4 +27,5 @@ void loopRadar(){
   }
   Serial.print(F("angle: "));
   Serial.println(_rotate_angle);
+  Serial.println("%,3,2,"+distance+","+_rotate_angle);
 }

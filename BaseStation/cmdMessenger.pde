@@ -60,7 +60,7 @@ void setupDelta(){
      .setText("SAVE")
      ;     
   cmdFirst=true;
-}
+}//rovercontrol
 
 void cmdcontrolEvent(ControlEvent theEvent) 
 {
@@ -70,7 +70,7 @@ void cmdcontrolEvent(ControlEvent theEvent)
     if(theEvent.getController().getName()=="camup")sendCmdMessege("w");
     if(theEvent.getController().getName()=="cammid")sendCmdMessege("s");
     if(theEvent.getController().getName()=="camdown")sendCmdMessege("x");
-    if(theEvent.getController().getName()=="saving")saveLog();
+    //if(theEvent.getController().getName()=="saving")saveLog();
   }
 }
 void sendCmdMessege(String cmd){

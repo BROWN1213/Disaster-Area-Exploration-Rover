@@ -16,7 +16,9 @@ void setupRoverAhrs() {
 
 void loopRoverAhrs() {
     roverAhrs.update();
-    roverAhrs.printAhrsInfo();
+    Serial.println("%,1,6,1,2,3,4,5,6");
+    //roverAhrs.printAhrsInfo();
     //Serial.print("ax=");
     //Serial.println(roverAhrs.ax);
+    
 }

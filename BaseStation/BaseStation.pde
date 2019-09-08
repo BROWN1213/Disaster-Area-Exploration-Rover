@@ -22,7 +22,7 @@ void draw(){
   int passedTime = millis() - savedTime;
   // Has 10 seconds passed?
   if (passedTime > totalTime) {
-    saveLog();
+    //saveLog();
     println("[saved]");
     
     savedTime = millis(); // Save the current time to restart the timer!

@@ -1,5 +1,7 @@
 String roll,pitch,yaw;
-//imu ok gps ok pm2.5 radar cam ......
+float ax,ay,az;
+float angle, distance;
+//imu [ok] gps [ok] pm2.5 radar cam //
 void setupSerial(){
   
   
@@ -72,7 +74,7 @@ void serialEvent(Serial port) //Reading the datas by Processing.
 {
    String input = port.readStringUntil('\n');
    //println(input);
-   appendSerialLog(input);
+   //appendSerialLog(input);
    
   if(input.indexOf("%") == 0){ //header
      input=input.substring(2,input.length()-2); 
@@ -85,6 +87,9 @@ void serialEvent(Serial port) //Reading the datas by Processing.
         roll=values[2];
         pitch=values[3];
         yaw=values[4];
+        ax=float(values[5]);
+        ay=float(values[6]);
+        az=float(values[7]);
       
         //print("[");print(millis());print("]");
         //print(roll);print(",");
@@ -95,7 +100,7 @@ void serialEvent(Serial port) //Reading the datas by Processing.
         //print(float(values[6]));print(",");
         //println(float(values[7]));
 
-        appendImuLog();
+        //appendImuLog();
       }
       if(int(values[0])==2){ //GPS
         lat=values[2];
@@ -111,7 +116,12 @@ void serialEvent(Serial port) //Reading the datas by Processing.
         print(lat);print(",");
         print(lng);print(",");
         println(alt);
-        appendGpsLog();
+        //appendGpsLog();
+      }
+      if(int(values[0])==3){
+        angle= float(values[2]);
+        distance= float(values[3]);
+        
       }
     }
   }

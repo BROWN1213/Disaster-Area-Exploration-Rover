@@ -29,8 +29,8 @@ void setup() {
  
   //Serial.begin(38400);     //MPU6050 default
   Serial.begin(9600);
-  //setupRoverGps();
-  //setupRoverAhrs();
+  setupRoverGps();
+  setupRoverAhrs();
   Serial.println("Setup Start!");
   //setupRoverMotor();
   setupRadar();
@@ -47,8 +47,8 @@ void timers(){
   if(steer_angle>135)steer_angle=60.;
 }
 void loop() {
-  //loopRoverAhrs();
-  //loopRoverGps(); 
+  loopRoverAhrs();
+  loopRoverGps(); 
    //loopJoystick();
   // put your setup code here, to run once:
   //setupRoverGps();

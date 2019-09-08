@@ -1,9 +1,9 @@
 // https://www.instructables.com/id/Data-Logging-SensorsInputs-With-Processing/
 
-Table gpsLog;
+/*Table gpsLog;
 Table imuLog;
 Table serialLog;
-
+float gpstime = 10.;
 String filename;
 
 boolean save_first;
@@ -53,20 +53,17 @@ void setupFileLog(){
   save_first=true;  
 }
 
-void appendGpsLog(){
+/*void appendGpsLog(){
+  
   TableRow newRow = gpsLog.addRow();  
-  newRow.setString("gpsTime", ".");
+  newRow.setString("gpsTime", str(gpstime));
   newRow.setString("sysTime", str(day()) + ":" + str(hour()) + ":" + str(minute()) + ":" + str(second())+":" + str(millis()));
   newRow.setString("Lat", lat);
   newRow.setString("Lng", lng);
   newRow.setString("Alt", alt);
-  newRow.setString("num_sat", num_sat);
-
-  
-  
-        
-}
-
+  newRow.setString("Num_sat", num_sat);
+}*/
+/*
 void appendImuLog(){
   
   //add a new row for each value
@@ -83,16 +80,16 @@ void appendSerialLog(String value){
   TableRow newRow = serialLog.addRow(); 
   newRow.setString("sysTime", str(day()) + ":" + str(hour()) + ":" + str(minute()) + ":" + str(second())+":" + str(millis()));
   newRow.setString("serialLOG", value);
-}
-
+}*/
+/*
 public void saveToCSV(int theValue){
   if(save_first){
     
     println("save");
     filename = "data/" +"GPS"+ str(month()) + "-" + str(day()) + "--" + str(hour()) + "-" + str(minute()) + ".csv";
     //save as a table in csv format(data/table - data folder name table)
-    saveTable(gpsLog, filename);
-    filename = "data/" +"Values"+ str(month()) + "-" + str(day()) + "--" + str(hour()) + "-" + str(minute()) + ".csv";
+    //saveTable(gpsLog, filename);
+    //filename = "data/" +"Values"+ str(month()) + "-" + str(day()) + "--" + str(hour()) + "-" + str(minute()) + ".csv";
 
     saveTable(imuLog, filename);
     
@@ -104,7 +101,7 @@ public void saveToCSV(int theValue){
   save_first=true;
 }
 void saveLog(){
-  appendGpsLog();
+  //appendGpsLog();
   appendImuLog();
   appendSerialLog("0");
-}
+}*/

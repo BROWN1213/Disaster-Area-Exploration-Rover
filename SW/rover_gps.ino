@@ -10,7 +10,7 @@ void setupRoverGps(){
 }
 
 void loopRoverGps(){
-
+  Serial.println("%,2,4,1,2,3,4");
   if(roverGPS.read()){  
        Serial.print("date=");
        Serial.println(roverGPS.date());
@@ -35,5 +35,6 @@ void loopRoverGps(){
 
 
 void loopPassthru(){
+   
    while (roverGPS.available()) Serial.write(roverGPS.readRaw());
 }
