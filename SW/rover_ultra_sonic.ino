@@ -1,14 +1,13 @@
 unsigned long distance_cm;
-float distanceFront;
-float distanceBack;
+
 String rover_direction;
 
 RoverUltraSonic sonicpinFront(13,12); // (trig, echo)
-RoverUltraSonic sonicpinBack(10,11);
+RoverUltraSonic sonicpinBack(11,10);
 
 void setupUltraSonic(){ 
   rover_direction="Front";
-  isFront= 0;
+  isFront= true;
 }
 
 void loopUltraSonic(){ 

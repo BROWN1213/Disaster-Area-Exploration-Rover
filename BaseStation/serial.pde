@@ -1,17 +1,24 @@
-String roll,pitch,yaw;
-float ax,ay,az;
-float angle, distance;
-//imu [ok] gps [ok] pm2.5 radar cam //
+import processing.serial.*;
+import controlP5.*;
+
+
+
+Serial myPort;
+DropdownList menu1, menu2;
+ControlP5 cp5;
+
+
 void setupSerial(){
-  
-  
   cp5 = new ControlP5(this);
 
   menu1 = cp5.addDropdownList("port")
-    .setPosition(10,10)
-    .setSize(300,500);    
+    .setPosition(10,60)
+    .setSize(200,500);    
 
   customize(menu1);
+  
+  
+
 }
 
 void customize(DropdownList ddl) {
@@ -38,6 +45,7 @@ void customize(DropdownList ddl) {
   
   
 }
+
 void controlEvent(ControlEvent theControlEvent) 
 {
   
@@ -45,7 +53,7 @@ void controlEvent(ControlEvent theControlEvent)
   { int list_num= (int)theControlEvent.controller().getValue();
     String port_name=Serial.list()[list_num];
     println(port_name);
-    myPort = new Serial(this, port_name, 57600);
+    myPort = new Serial(this, port_name, 115200);
     myPort.bufferUntil('\n');   
     delay(1000);
     String cmd="AT\r\n";
@@ -70,11 +78,12 @@ void reConnect(){
     delay(1000);
 }
 
+
 void serialEvent(Serial port) //Reading the datas by Processing.
 {
    String input = port.readStringUntil('\n');
    //println(input);
-   //appendSerialLog(input);
+   println(input);
    
   if(input.indexOf("%") == 0){ //header
      input=input.substring(2,input.length()-2); 
@@ -83,45 +92,26 @@ void serialEvent(Serial port) //Reading the datas by Processing.
      String[] values = split(input, ",");
      //values[0]: class, values[1]: num, 
       if(int(values[0])==1){ //IMU
-      
-        roll=values[2];
-        pitch=values[3];
-        yaw=values[4];
-        ax=float(values[5]);
-        ay=float(values[6]);
-        az=float(values[7]);
-      
-        //print("[");print(millis());print("]");
-        //print(roll);print(",");
-        //print(pitch);print(",");
-        //println(yaw);
-        //print("[");print(millis());print("]");
-        //print(float(values[5]));print(",");
-        //print(float(values[6]));print(",");
-        //println(float(values[7]));
-
-        //appendImuLog();
+        roll =values[2];
+        pitch =values[3];
+        yaw =values[4];
+        ax =float(values[5]);
+        ay =float(values[6]);
+        az =float(values[7]);
       }
-      if(int(values[0])==2){ //GPS
+      if(int(values[0])==2){  //GPS
         lat=values[2];
         lng=values[3];
         alt=values[4];
         num_sat=values[5];
-        //speed_ms=float(values[6];
-        //course=values[7]);
-        
-        //gps_new_messege=true; //
-
-        print("[");print(millis());print("gps");print("]");
-        print(lat);print(",");
-        print(lng);print(",");
-        println(alt);
-        //appendGpsLog();
+        speed_ms=values[6];
+        course=values[7];
       }
-      if(int(values[0])==3){
-        angle= float(values[2]);
-        distance= float(values[3]);
-        
+      if(int(values[0])==4){
+        distance=values[2];
+        angle=values[3];
+      }else{
+        println(input);
       }
-    }
   }
+}

@@ -1,4 +1,4 @@
-SoftwareSerial _GPSport(10,11);
+SoftwareSerial _GPSport(8,9);
 
 RoverGPS<SoftwareSerial> roverGPS(_GPSport);
 
@@ -10,29 +10,23 @@ void setupRoverGps(){
 }
 
 void loopRoverGps(){
-  Serial.println("%,2,4,1,2,3,4");
+ 
   if(roverGPS.read()){  
-       Serial.print("date=");
-       Serial.println(roverGPS.date());
-       Serial.print("time=");
-       Serial.println(roverGPS.time()/100.);
-       Serial.print("lat=");
-       Serial.println((roverGPS.location().lat* 1.0e-7f),7);
-       Serial.print("lon=");
-       Serial.println((roverGPS.location().lng* 1.0e-7f),7);       
-       Serial.print("altitude(m)=");
-       Serial.println(roverGPS.location().alt/100.); 
-       Serial.print("num_sat=");
-       Serial.println(roverGPS.num_sats()); 
-       Serial.print("speed(km/s)=");
-       Serial.println(roverGPS.ground_speed_km());
-       Serial.print("cource=");
-       Serial.println(roverGPS.ground_course());
-       Serial.println("*********************************"); 
+       Serial.print("%,2,8,");
+       Serial.print(roverGPS.date()); Serial.print(",");
+       Serial.print(roverGPS.time()/100.); Serial.print(",");
+       Serial.print((roverGPS.location().lat* 1.0e-7f),7); Serial.print(",");
+       Serial.print((roverGPS.location().lng* 1.0e-7f),7); Serial.print(",");
+       Serial.print(roverGPS.location().alt/100.); Serial.print(",");
+       Serial.print(roverGPS.num_sats()); Serial.print(",");
+       Serial.print(roverGPS.ground_speed_km()); Serial.print(",");
+       Serial.println(roverGPS.ground_course()); 
   }   
        
 }
-
+void loopRoverGpsTEST(){
+  Serial.println("%,2,8, 1,2,3,4,5,6,7,8");
+}
 
 void loopPassthru(){
    

@@ -90,16 +90,15 @@ void RoverAhrs::rx_empty(){
 void RoverAhrs::printAhrsInfo()
 {
   if(_print_count>=10){
-    Serial.println(F("++++  AHRS Info   +++++++++++++++"));
-    Serial.println(F("r/p/y/x/y/z= "));
+    
+    Serial.print(F("%,1,7,"));
     Serial.print(roll,1);Serial.print(F(","));
     Serial.print(pitch,1);Serial.print(F(","));
     Serial.print(yaw,1);Serial.print(F(","));
     Serial.print(ax,1);Serial.print(F(","));
     Serial.print(ay,1);Serial.print(F(","));
-    Serial.println(az,1);
-
-    Serial.print(F("motionAcc= "));
+    Serial.print(az,1);
+    Serial.print(F(","));
     Serial.println(_motion_acceleration,3);
     //Serial.println(F("++++++++++++++++++++++++++++++++++"));
     _print_count=0;

@@ -15,6 +15,7 @@ class RoverRadar
       RoverRadar(float steer_angle);
       float rotate_angle(float steer_angle,float servo_angle,float prev_servo_angle);
       float constrain_angle(float steer_angle);
+      void sendRaderInfo(float distance, int angle);
 
     private:
       float _steer_angle;

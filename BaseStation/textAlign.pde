@@ -1,6 +1,7 @@
-String num_sat;
-String lat,lng,alt;
-String velocity,pm2_5;
+String num_sat,distance,angle;
+String lat,lng,alt,roll,pitch,yaw;
+String velocity,pm2_5,speed_ms,course;
+float ax,ay,az;
 
 void drawText(){  
   fill(0,0,0);
@@ -14,6 +15,6 @@ void drawText(){
   
 }
 void drawradarText(){
-  text("distance from an object: "+"distance"+" at angle "+"angle",0,250);
+  text("distance from an object: "+distance+" at angle "+angle,0,250);
  
 }

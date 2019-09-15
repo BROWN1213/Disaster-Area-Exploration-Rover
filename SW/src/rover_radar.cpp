@@ -37,3 +37,10 @@ float RoverRadar::rotate_angle(float steer_angle,float servo_angle,float prev_se
     }   
   }
 }
+
+void RoverRadar::sendRaderInfo(float distance, int angle){
+  Serial.print("%,4,2,");
+  Serial.print(distance);Serial.print(",");
+  Serial.println(angle);
+}
+
