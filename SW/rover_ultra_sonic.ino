@@ -19,20 +19,14 @@ void loopUltraSonic(){
   float distance = (isFront)? distanceFront : distanceBack ;
   Serial.print(distance);
   Serial.println(F("cm"));
-  //sonicpin.isDistanceInArea(20,1);
-   //is Distance in Area??
-
-   // Do someting
-
 }
 
 void loopUltraSonicTest(){
   distanceFront=sonicpinFront.measureDistance();
     // //measure the distance);
+    Serial.print("%,4,2,");
   Serial.print(distanceFront);
-  Serial.println("cm");
-  
-    // print distance
-  delay(500);
-
+  Serial.print(",");
+  Serial.println(itest);
+  delay(200);
 }

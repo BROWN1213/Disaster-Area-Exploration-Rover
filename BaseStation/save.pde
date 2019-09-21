@@ -78,14 +78,15 @@ public void saveLog(int theValue){
 }
 void saving(){
   if(save_first){
-    println("[saved]");
+    if(myPort!=null){
+      println("[saved]");
     
-    saveTable(gpsLog, filename);
-    filename = "data/" +"GPS"+ str(month()) + "-" + str(day()) + "--" + str(hour()) + "-" + str(minute()) + ".csv";
+      saveTable(gpsLog, filename);
+      filename = "data/" +"GPS"+ str(month()) + "-" + str(day()) + "--" + str(hour()) + "-" + str(minute()) + ".csv";
 
-    saveTable(imuLog, filename);
-    filename = "data/" +"IMU"+ str(month()) + "-" + str(day()) + "--" + str(hour()) + "-" + str(minute()) + ".csv";
-    
+      saveTable(imuLog, filename);
+      filename = "data/" +"IMU"+ str(month()) + "-" + str(day()) + "--" + str(hour()) + "-" + str(minute()) + ".csv";
+    }
     //save as a table in csv format(data/table - data folder name table)  
   }
   save_first=true;

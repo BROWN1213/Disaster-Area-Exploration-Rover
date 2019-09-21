@@ -6,6 +6,7 @@ int totalTime = 10000;
 
 void setup(){
   size(1280,720,P2D);
+  
   setupSerial();
   setupDelta();
   setupFileLog();
@@ -13,6 +14,9 @@ void setup(){
 }
 
 void draw(){
+  drawRadar();
+  drawLine();
+  drawObject();
   drawText();
   drawWebcam();
   drawradarText();

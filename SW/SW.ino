@@ -38,41 +38,37 @@ void setup() {
  
   //Serial.begin(38400);     //MPU6050 default
   Serial.begin(115200);
-  /*setupRoverGps();
+  setupRoverGps();
   setupRoverAhrs();
   Serial.println("Setup Start!");
   //setupRoverMotor();
-  //setupRadar();
+  setupRadar();
   Serial.println("Setup Complete!");
   //setupJoystick();
   setupUltraSonic();
   int radar_timerId = timer.setInterval(700, timers);  
-  steer_angle=60.;*/
-  setupRadar();
+  steer_angle=60.;
+  
 }
 void timers(){
-  steer_angle= steer_angle+10;
+  //steer_angle= steer_angle+10;
   loopUltraSonic();
   loopRadar();
   loopRoverAhrs();
   loopRoverGpsTEST();
-  if(steer_angle>135)steer_angle=60.;
+  //if(steer_angle>135)steer_angle=60.;
 }
 void loop() {
-  test= test+10;
+  loopRadarTest();
+  loopUltraSonicTest();
+  /*test= test+10;
   if(test>160)test=30;
   radar_servoFront.write(test);
   radar_servoBack.write(test);
   Serial.print("test:");
   Serial.println(test);
-  delay(500);
-  /*if(ii==0){
-    isFront= false;
-    ii=4;
-  }else{
-    isFront= true;
-    ii=ii-1;
-  }
-  timer.run();*/
+  delay(500);*/
+
+  //timer.run();
 
 }
