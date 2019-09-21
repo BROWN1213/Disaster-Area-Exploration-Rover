@@ -1,8 +1,11 @@
 String num_sat,distance,angle;
-String lat,lng,alt,roll,pitch,yaw;
+String lat,lng,alt,roll,pitch,yaw,motion_acc;
 String velocity,pm2_5,speed_ms,course;
 float ax,ay,az;
 
+void setupText(){
+  
+}
 void drawText(){  
   fill(0,0,0);
   textSize(25);

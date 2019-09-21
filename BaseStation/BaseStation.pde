@@ -8,6 +8,7 @@ void setup(){
   size(1280,720,P2D);
   setupSerial();
   setupDelta();
+  setupFileLog();
   savedTime = millis();
 }
 
@@ -18,9 +19,10 @@ void draw(){
   int passedTime = millis() - savedTime;
   // Has 10 seconds passed?
   if (passedTime > totalTime) {
-    //saveLog();
-    println("[saved]");
-    
+    if(myPort!=null){
+      saveLog();
+      println("[auto-saving...]");
+    }
     savedTime = millis(); // Save the current time to restart the timer!
   }
 }

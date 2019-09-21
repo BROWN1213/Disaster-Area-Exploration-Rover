@@ -23,8 +23,6 @@ void setupSerial(){
 
 void customize(DropdownList ddl) {
   // a convenience function to customize a DropdownList
-  PFont pfont = createFont("Arial",20,true); // use true/false for smooth/no-smooth
-  ControlFont font = new ControlFont(pfont,12);
   //ddl.setFont(font);
   ddl.setBackgroundColor(color(190));
   ddl.setItemHeight(15);
@@ -83,7 +81,7 @@ void serialEvent(Serial port) //Reading the datas by Processing.
 {
    String input = port.readStringUntil('\n');
    //println(input);
-   println(input);
+   
    
   if(input.indexOf("%") == 0){ //header
      input=input.substring(2,input.length()-2); 
@@ -98,20 +96,25 @@ void serialEvent(Serial port) //Reading the datas by Processing.
         ax =float(values[5]);
         ay =float(values[6]);
         az =float(values[7]);
+        motion_acc=values[8];
+        appendImuLog();
       }
       if(int(values[0])==2){  //GPS
-        lat=values[2];
-        lng=values[3];
-        alt=values[4];
-        num_sat=values[5];
-        speed_ms=values[6];
-        course=values[7];
+        GPStime =values[2];
+        lat=values[3];
+        lng=values[4];
+        alt=values[5];
+        num_sat=values[6];
+        speed_ms=values[7];
+        course=values[8];
+        
+        appendGpsLog();
       }
       if(int(values[0])==4){
         distance=values[2];
         angle=values[3];
       }else{
-        println(input);
+        //println(input);
       }
   }
 }

@@ -1,18 +1,15 @@
 // https://www.instructables.com/id/Data-Logging-SensorsInputs-With-Processing/
 
-/*Table gpsLog;
+Table gpsLog;
 Table imuLog;
-Table serialLog;
 float gpstime = 10.;
 String filename;
 
+String GPStime;
 boolean save_first;
 void setupFileLog(){
-
-  
-  serialLog = new Table();
-  serialLog.addColumn("sysTime");
-  serialLog.addColumn("serialLOG");
+  PFont pfont = createFont("Arial",20,true); // use true/false for smooth/no-smooth
+  ControlFont font = new ControlFont(pfont,12);
   
   gpsLog = new Table();
   gpsLog.addColumn("gpsTime");
@@ -21,8 +18,6 @@ void setupFileLog(){
   gpsLog.addColumn("Lng");
   gpsLog.addColumn("Alt");  
   gpsLog.addColumn("Num_sat");  
-
-  
   
   imuLog = new Table();
   imuLog.addColumn("sysTime");
@@ -32,38 +27,35 @@ void setupFileLog(){
   imuLog.addColumn("ax");
   imuLog.addColumn("ay");
   imuLog.addColumn("az");
-  imuLog.addColumn("sqrt");
-  imuLog.addColumn("average");
   
-  
-  cp5.addButton("saveToCSV")
+  cp5.addButton("saving")
+     .setPosition(860,660)
+     .setSize(100,50)
      .setValue(0)
-     .setPosition(10,20)
-     .setSize(100,19)
+     .activateBy(ControlP5.RELEASE);
      ;
-   PFont pfont = createFont("Arial",20,true); // use true/false for smooth/no-smooth
-  ControlFont font = new ControlFont(pfont,241);
-  cp5.getController("saveToCSV")
+  cp5.getController("saving")
      .getCaptionLabel()
-     .setFont(font)
      .toUpperCase(false)
-     .setSize(12)
-     ;       
-     
+     .setSize(20)
+     .setFont(font)
+     .setText("SAVE")
+     ;   
+   
   save_first=true;  
 }
 
-/*void appendGpsLog(){
+void appendGpsLog(){
   
   TableRow newRow = gpsLog.addRow();  
-  newRow.setString("gpsTime", str(gpstime));
+  newRow.setString("gpsTime", GPStime);
   newRow.setString("sysTime", str(day()) + ":" + str(hour()) + ":" + str(minute()) + ":" + str(second())+":" + str(millis()));
   newRow.setString("Lat", lat);
   newRow.setString("Lng", lng);
   newRow.setString("Alt", alt);
   newRow.setString("Num_sat", num_sat);
-}*/
-/*
+}
+
 void appendImuLog(){
   
   //add a new row for each value
@@ -74,34 +66,22 @@ void appendImuLog(){
   newRow.setString("yaw", yaw);
 }
 
-void appendSerialLog(String value){
-
+public void saving(){
+  saveLog();
+}
   
-  TableRow newRow = serialLog.addRow(); 
-  newRow.setString("sysTime", str(day()) + ":" + str(hour()) + ":" + str(minute()) + ":" + str(second())+":" + str(millis()));
-  newRow.setString("serialLOG", value);
-}*/
-/*
-public void saveToCSV(int theValue){
+void saveLog(){
   if(save_first){
     
-    println("save");
+    println("[saved]");
+    
+    saveTable(gpsLog, filename);
     filename = "data/" +"GPS"+ str(month()) + "-" + str(day()) + "--" + str(hour()) + "-" + str(minute()) + ".csv";
-    //save as a table in csv format(data/table - data folder name table)
-    //saveTable(gpsLog, filename);
-    //filename = "data/" +"Values"+ str(month()) + "-" + str(day()) + "--" + str(hour()) + "-" + str(minute()) + ".csv";
 
     saveTable(imuLog, filename);
+    filename = "data/" +"IMU"+ str(month()) + "-" + str(day()) + "--" + str(hour()) + "-" + str(minute()) + ".csv";
     
-    filename = "data/" +"Serial"+ str(month()) + "-" + str(day()) + "--" + str(hour()) + "-" + str(minute()) + ".csv";
-    //save as a table in csv format(data/table - data folder name table)
-    saveTable(serialLog, filename);  
-    //exit();  
+    //save as a table in csv format(data/table - data folder name table)  
   }
   save_first=true;
 }
-void saveLog(){
-  //appendGpsLog();
-  appendImuLog();
-  appendSerialLog("0");
-}*/
