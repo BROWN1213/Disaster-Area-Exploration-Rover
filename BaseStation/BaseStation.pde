@@ -20,7 +20,7 @@ void draw(){
   // Has 10 seconds passed?
   if (passedTime > totalTime) {
     if(myPort!=null){
-      saveLog();
+      saving();
       println("[auto-saving...]");
     }
     savedTime = millis(); // Save the current time to restart the timer!

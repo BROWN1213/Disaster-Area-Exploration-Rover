@@ -60,7 +60,6 @@ void cmdcontrolEvent(ControlEvent theEvent)
     if(theEvent.getController().getName()=="camdown")sendCmdMessege("x");
     
   }
- if(theEvent.getController().getName()=="saving")saveLog();
 }
 void sendCmdMessege(String cmd){
   if(myPort!=null)myPort.write(cmd);

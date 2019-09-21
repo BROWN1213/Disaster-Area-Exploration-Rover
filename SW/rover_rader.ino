@@ -7,14 +7,22 @@ float distance_per_angle;
 RoverRadar radarFront(steer_angle);
 RoverRadar radarBack(steer_angle);
 
-Servo radar_servoFront;
-Servo radar_servoBack;
 
+void radarTest(){
+  int test = 30;
+  radar_servoFront.write(test);
+  radar_servoBack.write(test);
+  Serial.println(radar_servoFront.read());
+  Serial.println(radar_servoFront.read());
+  delay(500);
+}
 void setupRadar(){
   radar_servoFront.attach(3);
-  radar_servoFront.write(60);
+  radar_servoFront.write(steer_angle);
   radar_servoBack.attach(5);
   radar_servoBack.write(steer_angle);
+  Serial.println("*************************");
+  Serial.println(radar_servoFront.read());
   Serial.println("*************************");
   Serial.println(radar_servoFront.read());
   Serial.println("*************************");

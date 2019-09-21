@@ -96,8 +96,10 @@ void serialEvent(Serial port) //Reading the datas by Processing.
         ax =float(values[5]);
         ay =float(values[6]);
         az =float(values[7]);
-        motion_acc=values[8];
+        
         appendImuLog();
+        
+        motion_acc=values[8];
       }
       if(int(values[0])==2){  //GPS
         GPStime =values[2];

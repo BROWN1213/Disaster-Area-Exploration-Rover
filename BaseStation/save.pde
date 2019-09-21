@@ -8,8 +8,6 @@ String filename;
 String GPStime;
 boolean save_first;
 void setupFileLog(){
-  PFont pfont = createFont("Arial",20,true); // use true/false for smooth/no-smooth
-  ControlFont font = new ControlFont(pfont,12);
   
   gpsLog = new Table();
   gpsLog.addColumn("gpsTime");
@@ -18,6 +16,8 @@ void setupFileLog(){
   gpsLog.addColumn("Lng");
   gpsLog.addColumn("Alt");  
   gpsLog.addColumn("Num_sat");  
+  gpsLog.addColumn("Speed_ms");  
+  gpsLog.addColumn("Course");  
   
   imuLog = new Table();
   imuLog.addColumn("sysTime");
@@ -28,13 +28,16 @@ void setupFileLog(){
   imuLog.addColumn("ay");
   imuLog.addColumn("az");
   
-  cp5.addButton("saving")
+  cp5.addButton("saveLog")
      .setPosition(860,660)
      .setSize(100,50)
      .setValue(0)
      .activateBy(ControlP5.RELEASE);
      ;
-  cp5.getController("saving")
+  PFont pfont = createFont("Arial",20,true); // use true/false for smooth/no-smooth
+  ControlFont font = new ControlFont(pfont,24);
+  
+  cp5.getController("saveLog")
      .getCaptionLabel()
      .toUpperCase(false)
      .setSize(20)
@@ -53,7 +56,8 @@ void appendGpsLog(){
   newRow.setString("Lat", lat);
   newRow.setString("Lng", lng);
   newRow.setString("Alt", alt);
-  newRow.setString("Num_sat", num_sat);
+  newRow.setString("Speed_ms", speed_ms);
+  newRow.setString("Course", course);
 }
 
 void appendImuLog(){
@@ -64,15 +68,16 @@ void appendImuLog(){
   newRow.setString("roll", roll);
   newRow.setString("pitch", pitch);
   newRow.setString("yaw", yaw);
-}
-
-public void saving(){
-  saveLog();
+  newRow.setString("ax", str(ax));
+  newRow.setString("ay", str(ay));
+  newRow.setString("az", str(az));
 }
   
-void saveLog(){
+public void saveLog(int theValue){
+  if(myPort!=null)saving();
+}
+void saving(){
   if(save_first){
-    
     println("[saved]");
     
     saveTable(gpsLog, filename);
