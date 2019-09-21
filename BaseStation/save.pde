@@ -78,7 +78,7 @@ public void saveLog(int theValue){
 }
 void saving(){
   if(save_first){
-    if(myPort!=null){
+    
       println("[saved]");
     
       saveTable(gpsLog, filename);
@@ -86,7 +86,7 @@ void saving(){
 
       saveTable(imuLog, filename);
       filename = "data/" +"IMU"+ str(month()) + "-" + str(day()) + "--" + str(hour()) + "-" + str(minute()) + ".csv";
-    }
+    
     //save as a table in csv format(data/table - data folder name table)  
   }
   save_first=true;

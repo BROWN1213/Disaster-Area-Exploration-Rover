@@ -115,8 +115,7 @@ void serialEvent(Serial port) //Reading the datas by Processing.
       if(int(values[0])==4){
         distance=values[2];
         angle=values[3];
-      }else{
-        //println(input);
       }
+      println(distance);
   }
 }
