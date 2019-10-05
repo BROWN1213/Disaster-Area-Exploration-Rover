@@ -45,10 +45,10 @@ void RoverRadar::sendRaderInfo(float distance, int angle){
 }
 float RoverRadar::turn_angle(int angle){
     if(c){
-    i=i+1;
+    i=i+10;
     if(i>160)c=false;
   }else{
-     i=i-1;
+     i=i-10;
     if(i<20)c=true;
   }
   angle=i;
