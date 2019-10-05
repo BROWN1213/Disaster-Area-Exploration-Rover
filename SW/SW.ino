@@ -51,16 +51,16 @@ void setup() {
   
 }
 void timers(){
-  //steer_angle= steer_angle+10;
+  
   loopUltraSonic();
   loopRadar();
   loopRoverAhrs();
-  loopRoverGpsTEST();
-  //if(steer_angle>135)steer_angle=60.;
+  //loopRoverGpsTEST();
+  
 }
 void loop() {
-  loopRadarTest();
-  loopUltraSonicTest();
+  //loopRadarTest();
+  //loopUltraSonicTest();
   /*test= test+10;
   if(test>160)test=30;
   radar_servoFront.write(test);
@@ -69,6 +69,6 @@ void loop() {
   Serial.println(test);
   delay(500);*/
 
-  //timer.run();
+  timer.run();
 
 }

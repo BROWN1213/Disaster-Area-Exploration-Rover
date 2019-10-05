@@ -15,10 +15,13 @@ void loopUltraSonic(){
   distanceFront=sonicpinFront.measureDistance();
   distanceBack=sonicpinBack.measureDistance();
   String rover_direction = (isFront)? "Front" : "Back" ;
-  Serial.print("distance"+rover_direction+": ");
+  //Serial.print("distance"+rover_direction+": ");
+  Serial.print("%,4,2,");
   float distance = (isFront)? distanceFront : distanceBack ;
   Serial.print(distance);
-  Serial.println(F("cm"));
+  Serial.print(",");
+  Serial.println(itest);
+  //Serial.println(F("cm"));
 }
 
 void loopUltraSonicTest(){
