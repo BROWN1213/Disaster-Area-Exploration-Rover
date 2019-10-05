@@ -1,24 +1,24 @@
-#define SERVO_PIN 3
-float steer_angle=90;
-int i=0;
-Servo servo;
-//RoverRader rader(servo,SERVO_PIN,steer_angle);
-void setupRader(){
-  servo.attach(SERVO_PIN);
-  constrain(steer_angle,30,150);
 
+float prev_servo_angle;
+float _rotate_angle;
+float servo_angle=130.;
+
+RoverRadar radar(steer_angle);
+
+void setupRadar(){
+  radar_servo.attach(SERVO_PIN);
+  radar_servo.write(steer_angle);
+  //float steer_angle=radar.constrain_angle(steer_angle);
 }
-void loopRader(){
+
+void loopRadar(){
+  prev_servo_angle = servo_angle;
+  servo_angle = radar_servo.read();
   
-  float min_angle=steer_angle-30.;// "±30" can be changed
-  float max_angle=steer_angle+30.;
-  if(i==0){
-    servo.write(min_angle);
-    i=1;
-  }else{
-    servo.write(max_angle);
-    i=0;
-  }
-  delay(500);
-  servo.write(steer_angle);
+  _rotate_angle = radar.rotate_angle(steer_angle,servo_angle,prev_servo_angle);
+  radar_servo.write(_rotate_angle);
+  
+  Serial.print(F("angle: "));
+  Serial.println(_rotate_angle);
+  
 }
