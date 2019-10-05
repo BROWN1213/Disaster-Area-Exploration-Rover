@@ -1,3 +1,7 @@
+PImage img;
+
 void drawWebcam(){  
-  square(680,0,600);
+  //String url="";
+  //img =  loadImage(url,"jpg"); 
+  //image(img,680,0);
 }

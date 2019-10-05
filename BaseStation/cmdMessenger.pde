@@ -46,18 +46,19 @@ void setupDelta(){
      .setSize(20)
      .setText("CAMDOWN")
      ;     
+  
   cmdFirst=true;
-}
+}//rovercontrol
 
 void cmdcontrolEvent(ControlEvent theEvent) 
-{//
+{
   
   if(cmdFirst) {
 
     if(theEvent.getController().getName()=="camup")sendCmdMessege("w");
     if(theEvent.getController().getName()=="cammid")sendCmdMessege("s");
     if(theEvent.getController().getName()=="camdown")sendCmdMessege("x");
-
+    
   }
 }
 void sendCmdMessege(String cmd){

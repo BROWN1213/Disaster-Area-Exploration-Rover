@@ -1,17 +1,28 @@
+import processing.serial.*;
+import controlP5.*;
+
+
+
+Serial myPort;
+DropdownList menu1, menu2;
+ControlP5 cp5;
+
+
 void setupSerial(){
   cp5 = new ControlP5(this);
 
   menu1 = cp5.addDropdownList("port")
-    .setPosition(10,10)
-    .setSize(300,500);    
+    .setPosition(10,60)
+    .setSize(200,500);    
 
   customize(menu1);
+  
+  
+
 }
 
 void customize(DropdownList ddl) {
   // a convenience function to customize a DropdownList
-  PFont pfont = createFont("Arial",20,true); // use true/false for smooth/no-smooth
-  ControlFont font = new ControlFont(pfont,12);
   //ddl.setFont(font);
   ddl.setBackgroundColor(color(190));
   ddl.setItemHeight(15);
@@ -32,6 +43,7 @@ void customize(DropdownList ddl) {
   
   
 }
+
 void controlEvent(ControlEvent theControlEvent) 
 {
   
@@ -39,7 +51,7 @@ void controlEvent(ControlEvent theControlEvent)
   { int list_num= (int)theControlEvent.controller().getValue();
     String port_name=Serial.list()[list_num];
     println(port_name);
-    myPort = new Serial(this, port_name, 57600);
+    myPort = new Serial(this, port_name, 115200);
     myPort.bufferUntil('\n');   
     delay(1000);
     String cmd="AT\r\n";
@@ -62,4 +74,48 @@ void reConnect(){
     cmd="ATD\r\n";
     myPort.write(cmd);  
     delay(1000);
+}
+
+
+void serialEvent(Serial port) //Reading the datas by Processing.
+{
+   String input = port.readStringUntil('\n');
+   //println(input);
+   
+   
+  if(input.indexOf("%") == 0){ //header
+     input=input.substring(2,input.length()-2); 
+     //println(input);
+     input = trim(input);
+     String[] values = split(input, ",");
+     //values[0]: class, values[1]: num, 
+      if(int(values[0])==1){ //IMU
+        roll =values[2];
+        pitch =values[3];
+        yaw =values[4];
+        ax =float(values[5]);
+        ay =float(values[6]);
+        az =float(values[7]);
+        
+        appendImuLog();
+        
+        motion_acc=values[8];
+      }
+      if(int(values[0])==2){  //GPS
+        GPStime =values[2];
+        lat=values[3];
+        lng=values[4];
+        alt=values[5];
+        num_sat=values[6];
+        speed_ms=values[7];
+        course=values[8];
+        
+        appendGpsLog();
+      }
+      if(int(values[0])==4){
+        distance=values[2];
+        angle=values[3];
+      }
+      println(distance);
+  }
 }

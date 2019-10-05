@@ -1,20 +1,33 @@
 import processing.serial.*;
 import controlP5.*;
 
-Serial myPort;
-DropdownList menu1, menu2;
-ControlP5 cp5;
+int savedTime;
+int totalTime = 10000;
 
-String num_sat;
-String lat,lng,alt;
-String velocity,pm2_5;
 void setup(){
   size(1280,720,P2D);
+  
   setupSerial();
   setupDelta();
+  setupFileLog();
+  savedTime = millis();
 }
 
 void draw(){
+  background(200);
+  drawRadar();
+  drawLine();
+  drawObject();
   drawText();
   drawWebcam();
+  drawradarText();
+  int passedTime = millis() - savedTime;
+  // Has 10 seconds passed?
+  if (passedTime > totalTime) {
+    if(myPort!=null){
+      //saving();
+      println("[auto-saving...]");
+    }
+    savedTime = millis(); // Save the current time to restart the timer!
+  }
 }

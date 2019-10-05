@@ -11,7 +11,6 @@
 #include "src/rover_sht.h"
 /*  pin map */
 // GPS : 8,9
-// BLE : 4,5
 // Lx16A : 6,7
 // SD : 13,12,11,10
 // MQ7 carbon Monoxide:  A0
@@ -21,9 +20,6 @@
 //  SHT3x : I2C 0x45
 // MPU6050 : I2C 0x68 
 
-int joy_velocity=0,joy_raduis=0;
-int v=0;
-
 CmdMessenger cmdMessenger = CmdMessenger(Serial);
 
 
@@ -31,7 +27,7 @@ CmdMessenger cmdMessenger = CmdMessenger(Serial);
 
 // the timer scheduler object
 SimpleTimer schedule_timer;
-int gps_timer_id,ahrs_timer_id,ble_joy_timer_id,e_sensor_timer_id;
+int gps_timer_id,ahrs_timer_id,e_sensor_timer_id;
 int ultra_sonic_timer_id;
 void setup() {
 
@@ -41,14 +37,10 @@ void setup() {
   pinMode(13,OUTPUT);
   pirintLogo();  
 
-  //setupRoverGps();
-
   setupEnvironmentalSensor();
   setupRoverAhrs();
   setupRoverMotor();
-
-  setupJoystick();
-  //setupUltraSonic();  // BLE or UltraSonic
+  setupUltraSonic();  // BLE or UltraSonic
   setupRoverGps();   // GPS setup must be the last .. I don't know the reason
 
 
@@ -60,7 +52,6 @@ void setup() {
   // GPS use polling in loop() 
   //gps_timer_id=schedule_timer.setInterval(1000, updateRoverGps); //1Hz
   ahrs_timer_id=schedule_timer.setInterval(500, updateRoverAhrs); //2Hz
-  //ble_joy_timer_id=schedule_timer.setInterval(200, updateJoystick); //5Hz
   e_sensor_timer_id=schedule_timer.setInterval(2000, updateEnvironmentalSensor); //0.5Hz
   //ultra_sonic_timer_id=schedule_timer.setInterval(300, updateUltraSonic); //0.33Hz
   schedule_timer.setInterval(1000, heatbeat);
