@@ -9,7 +9,6 @@
 #include "src/rover_PM2_5.h"
 #include "src/rover_MQ7.h"
 #include "src/rover_sht.h"
-#include "src/rover_location.h"
 /*  pin map */
 // GPS : 8,9
 // Lx16A : 6,7
