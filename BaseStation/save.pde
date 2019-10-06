@@ -53,11 +53,11 @@ void appendGpsLog(){
   TableRow newRow = gpsLog.addRow();  
   newRow.setString("gpsTime", GPStime);
   newRow.setString("sysTime", str(day()) + ":" + str(hour()) + ":" + str(minute()) + ":" + str(second())+":" + str(millis()));
-  newRow.setString("Lat", lat);
-  newRow.setString("Lng", lng);
-  newRow.setString("Alt", alt);
-  newRow.setString("Speed_ms", speed_ms);
-  newRow.setString("Course", course);
+  newRow.setString("Lat", str(lat));
+  newRow.setString("Lng", str(lng));
+  newRow.setString("Alt", str(alt));
+  newRow.setString("Speed_ms", str(speed_ms));
+  newRow.setString("Course", str(course));
 }
 
 void appendImuLog(){
@@ -65,9 +65,9 @@ void appendImuLog(){
   //add a new row for each value
   TableRow newRow = imuLog.addRow();  
   newRow.setString("sysTime", str(day()) + ":" + str(hour()) + ":" + str(minute()) + ":" + str(second())+":" + str(millis()));
-  newRow.setString("roll", roll);
-  newRow.setString("pitch", pitch);
-  newRow.setString("yaw", yaw);
+  newRow.setString("roll", str(roll));
+  newRow.setString("pitch", str(pitch));
+  newRow.setString("yaw", str(yaw));
   newRow.setString("ax", str(ax));
   newRow.setString("ay", str(ay));
   newRow.setString("az", str(az));

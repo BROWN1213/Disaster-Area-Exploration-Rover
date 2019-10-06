@@ -13,7 +13,7 @@
 #define SERVO_PIN_FRONT 3
 #define SERVO_PIN_BACK 5
 
-SimpleTimer timer; 
+SimpleTimer timerR; 
 
 float distanceFront;
 float distanceBack;
@@ -34,33 +34,21 @@ Servo radar_servoBack;
 ///
 
 void setup() {
-  
- 
   //Serial.begin(38400);     //MPU6050 default
   Serial.begin(115200);
+  Serial.println("Setup Start!");
   setupRoverGps();
   setupRoverAhrs();
-  Serial.println("Setup Start!");
   //setupRoverMotor();
   setupRadar();
-  Serial.println("Setup Complete!");
-  //setupJoystick();
   setupUltraSonic();
-  int radar_timerId = timer.setInterval(700, timers);  
+  int radar_timerId = timerR.setInterval(200, timerRadar);  
   steer_angle=60.;
-  
+  Serial.println("Setup Complete!");  
 }
-void timers(){
-  //steer_angle= steer_angle+10;
-  loopUltraSonic();
-  loopRadar();
-  loopRoverAhrs();
-  loopRoverGpsTEST();
-  //if(steer_angle>135)steer_angle=60.;
-}
+
 void loop() {
-  loopRadarTest();
-  loopUltraSonicTest();
+  
   /*test= test+10;
   if(test>160)test=30;
   radar_servoFront.write(test);
@@ -68,7 +56,14 @@ void loop() {
   Serial.print("test:");
   Serial.println(test);
   delay(500);*/
+  timerR.run();
+} 
 
-  //timer.run();
-
+void timerRadar(){  //0.2s 
+  loopRadar();
+  if(isFront){
+    loopUltraSonicFront();
+  }else{
+    loopUltraSonicBack();
+  }  
 }

@@ -43,4 +43,15 @@ void RoverRadar::sendRaderInfo(float distance, int angle){
   Serial.print(distance);Serial.print(",");
   Serial.println(angle);
 }
+int RoverRadar::turn_angle(int angle){
+    if(c){
+    i=i+10;
+    if(i>160)c=false;
+  }else{
+     i=i-10;
+    if(i<20)c=true;
+  }
+  angle=i;
+  return angle;
+}
 
