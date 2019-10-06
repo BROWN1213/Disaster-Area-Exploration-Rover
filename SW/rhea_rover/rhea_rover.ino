@@ -9,6 +9,7 @@
 #include "src/rover_PM2_5.h"
 #include "src/rover_MQ7.h"
 #include "src/rover_sht.h"
+#include "src/rover_location.h"
 /*  pin map */
 // GPS : 8,9
 // Lx16A : 6,7
@@ -17,7 +18,7 @@
 // UltraSonic : 4,5     // BLE or UltraSonic
 // PM2.5 :  A1, 2
 // RF communication : 0,1 (Serial)  
-//  SHT3x : I2C 0x45
+// SHT3x : I2C 0x45
 // MPU6050 : I2C 0x68 
 
 CmdMessenger cmdMessenger = CmdMessenger(Serial);

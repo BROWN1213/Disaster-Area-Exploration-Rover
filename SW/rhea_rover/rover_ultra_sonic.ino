@@ -7,8 +7,8 @@ void setupUltraSonic(){
 float distance;
 
 void updateUltraSonic(){ 
-   //measure the distance
-   ROVER_LOG("update Ultra");
+  //measure the distance
+  ROVER_LOG("update Ultra");
   distance=roverUltraSonic.measureDistance();
 
 }
