@@ -1,13 +1,13 @@
-String num_sat,distance,angle;
-String lat,lng,alt,roll,pitch,yaw,motion_acc;
-String velocity,pm2_5,speed_ms,course;
+float num_sat,distance,angle;
+float lat,lng,alt,roll,pitch,yaw,motion_acc;
+float velocity,pm2_5,speed_ms,course;
 float ax,ay,az;
 
 void setupText(){
   
 }
 void drawText(){  
-  fill(0,0,0);
+  fill(255,255,255);
   textSize(25);
   
   text("roll,pitch,yaw: "+roll+","+pitch+","+yaw,0,50);

@@ -10,26 +10,22 @@ void setupUltraSonic(){
   isFront= true;
 }
 
-void loopUltraSonic(){ 
-   //measure the distance
-  distanceFront=sonicpinFront.measureDistance();
+void loopUltraSonicBack(){ 
   distanceBack=sonicpinBack.measureDistance();
-  String rover_direction = (isFront)? "Front" : "Back" ;
-  //Serial.print("distance"+rover_direction+": ");
+    // //measure the distance);
   Serial.print("%,4,2,");
-  float distance = (isFront)? distanceFront : distanceBack ;
-  Serial.print(distance);
+  Serial.print(distanceBack);
   Serial.print(",");
-  Serial.println(itest);
-  //Serial.println(F("cm"));
+  Serial.println(radar_servoBack.read());
+  delay(200);
 }
 
-void loopUltraSonicTest(){
+void loopUltraSonicFront(){
   distanceFront=sonicpinFront.measureDistance();
     // //measure the distance);
     Serial.print("%,4,2,");
   Serial.print(distanceFront);
   Serial.print(",");
-  Serial.println(itest);
+  Serial.println(radar_servoFront.read());
   delay(200);
 }

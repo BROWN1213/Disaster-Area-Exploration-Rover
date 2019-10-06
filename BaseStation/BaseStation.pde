@@ -6,21 +6,23 @@ int totalTime = 10000;
 
 void setup(){
   size(1280,720,P2D);
-  background(200);
+  background(0);
   setupSerial();
   setupDelta();
   setupFileLog();
   savedTime = millis();
+  setupRadar();
+  
 }
 
 void draw(){
-  fill(200);
   
+  fill(0);
   rect(0,0,640,720);
-  rect(640,0,200,720);
+  rect(640,0,160,720);
   rect(800,270,480,450);
-
   noStroke();
+  
   drawText();
   drawWebcam();
   drawradarText();
@@ -33,9 +35,9 @@ void draw(){
     }
     savedTime = millis(); // Save the current time to restart the timer!
   }
-  
-  drawRadar();
   blur();
+  drawRadar();
+  
   drawLine();
   drawObject();
 }

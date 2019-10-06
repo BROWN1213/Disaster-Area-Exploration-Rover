@@ -90,32 +90,34 @@ void serialEvent(Serial port) //Reading the datas by Processing.
      String[] values = split(input, ",");
      //values[0]: class, values[1]: num, 
       if(int(values[0])==1){ //IMU
-        roll =values[2];
-        pitch =values[3];
-        yaw =values[4];
+        roll =float(values[2]);
+        pitch =float(values[3]);
+        yaw =float(values[4]);
         ax =float(values[5]);
         ay =float(values[6]);
         az =float(values[7]);
         
         appendImuLog();
         
-        motion_acc=values[8];
+        motion_acc=float(values[8]);
       }
       if(int(values[0])==2){  //GPS
         GPStime =values[2];
-        lat=values[3];
-        lng=values[4];
-        alt=values[5];
-        num_sat=values[6];
-        speed_ms=values[7];
-        course=values[8];
+        lat=float(values[3]);
+        lng=float(values[4]);
+        alt=float(values[5]);
+        num_sat=float(values[6]);
+        speed_ms=float(values[7]);
+        course=float(values[8]);
         
         appendGpsLog();
       }
       if(int(values[0])==4){
-        distance=values[2];
-        angle=values[3];
+        distance=float(values[2]);
+        angle=float(values[3]);
+        
       }
+      println(angle);
       println(distance);
   }
 }

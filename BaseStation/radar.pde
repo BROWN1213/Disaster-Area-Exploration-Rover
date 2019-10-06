@@ -1,8 +1,12 @@
 
 float pixsDistance;
+void setupRadar(){
+  distance=0.;
+  angle=0.;
+}
 void drawRadar() {
-  stroke(0);
-  rect(800,-10,500,280,7);
+  
+  
   pushMatrix();
   translate(240,250); // moves the starting coordinats to new location
   noFill();
@@ -31,7 +35,7 @@ void drawLine() {
     stroke(30,250,60);  //green
     translate(1040,250); // moves the starting coordinats to new location
   
-    line(0,0,240*cos(radians(float(angle))),-240*sin(radians(float(angle)))); // draws the line according to the angle
+    line(0,0,240*cos(radians(int(angle))),-240*sin(radians(int(angle)))); // draws the line according to the angle
     popMatrix();
   }
 }
@@ -41,17 +45,18 @@ void drawObject() {
     translate(1040,250); // moves the starting coordinats to new location
     strokeWeight(3);
     stroke(255,10,10); // red color
-    pixsDistance = float(distance)*22.5/4; // covers the distance from the sensor from cm to pixels
+    pixsDistance = distance*4.5/2; // covers the distance from the sensor from cm to pixels
     // limiting the range to 40 cms
-    if(float(distance)<40){
+    if(distance<100){
       // draws the object according to the angle and the distance
-    line(pixsDistance*cos(radians(float(angle))),-pixsDistance*sin(radians(float(angle))),240*cos(radians(float(angle))),-240*sin(radians(float(angle))));
+    line(pixsDistance*cos(radians(angle)),-pixsDistance*sin(radians(angle)),240*cos(radians(angle)),-240*sin(radians(angle)));
     }
     popMatrix();
+    noStroke();
   }
 }
 void blur(){
-fill(98,245,31);
+  fill(98,245,31);
   // simulating motion blur and slow fade of the moving line
   noStroke();
   fill(0,4); 
