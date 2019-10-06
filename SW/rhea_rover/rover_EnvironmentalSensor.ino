@@ -25,11 +25,11 @@ void updateEnvironmentalSensor(){
   ROVER_LOG("Temp(C) Hum(%) PM2.5(μg/m^3) CO(ppm) ");
   //ROVER_LOG4((int)roverSHT3x.cTemp,(int)roverSHT3x.humidity,(int)roverPM2_5.dustDensity,roverMQ7.co_ppm)
 
-    //processing
-    Serial.print("%");  //header
-    Serial.print((int)roverSHT3x.cTemp);Serial.print(" ");
-    Serial.print((int)roverSHT3x.humidity);Serial.print(" ");
-    Serial.print((int)roverPM2_5.dustDensity);Serial.print(" ");
-    Serial.println((int)roverMQ7.co_ppm);  
+  //processing
+  Serial.print("%");  //header
+  Serial.print((int)roverSHT3x.cTemp);Serial.print(" ");
+  Serial.print((int)roverSHT3x.humidity);Serial.print(" ");
+  Serial.print((int)roverPM2_5.dustDensity);Serial.print(" ");
+  Serial.println((int)roverMQ7.co_ppm);  
 
 }

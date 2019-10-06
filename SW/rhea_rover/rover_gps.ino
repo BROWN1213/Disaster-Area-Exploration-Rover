@@ -67,7 +67,7 @@ void updateRoverGps(){
     Serial.print(roverGPS.ground_speed_ms());Serial.print(" ");
     Serial.println(roverGPS.ground_course());  
 
-  //
+  
 
     } //if(roverGPS.read())
   }else{
@@ -78,5 +78,5 @@ void updateRoverGps(){
 
 
 void loopPassthru(){
-   while (roverGPS.available()) Serial.write(roverGPS.readRaw());
+  while (roverGPS.available()) Serial.write(roverGPS.readRaw());
 }

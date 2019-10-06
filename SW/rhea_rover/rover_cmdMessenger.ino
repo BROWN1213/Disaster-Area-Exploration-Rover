@@ -52,27 +52,27 @@ void OnHomePosition(){
 
 void OnDrivingMode(){
   // Read led state argument, 
-   int trigger;
-   trigger = cmdMessenger.readInt16Arg();
-   if(trigger==0){ //automode
+  int trigger;
+  trigger = cmdMessenger.readInt16Arg();
+  if(trigger==0){ //automode
 //     if(!tskNavigation.getNavigationMode()){
 //        Serial.println(F("Navigation already automode ")); 
 //     }else{
 //        tskNavigation.setNavigationMode(0);
 //     }    
-     cmdMessenger.sendCmd(kAcknowledge,F("Driving:auto"));
-     ROVER_LOG("Driving:auto");
+    cmdMessenger.sendCmd(kAcknowledge,F("Driving:auto"));
+    ROVER_LOG("Driving:auto");
 
-   }
-   if(trigger==1){ //manual mode
+  }
+  if(trigger==1){ //manual mode
 //     if(tskNavigation.getNavigationMode()){
 //        Serial.println(F("Navigation already manualmode ")); 
 //     }else{
 //        tskNavigation.setNavigationMode(1);
 //     }    
-     cmdMessenger.sendCmd(kAcknowledge,F("Driving:manual"));
-     ROVER_LOG("Driving:manual");
-   }  
+  cmdMessenger.sendCmd(kAcknowledge,F("Driving:manual"));
+  ROVER_LOG("Driving:manual");
+  }  
 }
 
 extern int velocity,radius;
