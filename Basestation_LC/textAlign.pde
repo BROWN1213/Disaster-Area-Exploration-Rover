@@ -17,7 +17,7 @@ void drawText(){
   text(velocity+" Km",0,680);
   
 }
-void drawradarText(){
+void drawRadarText(){
   text("distance from an object: "+distance+" at angle "+angle,0,250);
- 
+  text("",0,0);
 }

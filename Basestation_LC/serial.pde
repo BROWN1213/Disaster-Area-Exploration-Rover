@@ -99,10 +99,9 @@ void serialEvent(Serial port) //Reading the datas by Processing.
         
         appendImuLog();
         
-        motion_acc=float(values[8]);
       }
       if(int(values[0])==2){  //GPS
-        GPStime =values[2];
+        GPStime =float(values[2]);
         lat=float(values[3]);
         lng=float(values[4]);
         alt=float(values[5]);
@@ -115,9 +114,7 @@ void serialEvent(Serial port) //Reading the datas by Processing.
       if(int(values[0])==4){
         distance=float(values[2]);
         angle=float(values[3]);
-        
+        appendRadarLog();
       }
-      println(angle);
-      println(distance);
   }
 }

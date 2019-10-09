@@ -2,10 +2,10 @@
 
 Table gpsLog;
 Table imuLog;
-float gpstime = 10.;
+Table radarLog;
+float GPStime = 10.;
 String filename;
 
-String GPStime;
 boolean save_first;
 void setupFileLog(){
   
@@ -27,6 +27,11 @@ void setupFileLog(){
   imuLog.addColumn("ax");
   imuLog.addColumn("ay");
   imuLog.addColumn("az");
+  
+  radarLog = new Table();
+  radarLog.addColumn("sysTime");
+  radarLog.addColumn("distance");
+  radarLog.addColumn("angle");
   
   cp5.addButton("saveLog")
      .setPosition(860,660)
@@ -51,11 +56,12 @@ void setupFileLog(){
 void appendGpsLog(){
   
   TableRow newRow = gpsLog.addRow();  
-  newRow.setString("gpsTime", GPStime);
+  newRow.setString("gpsTime", str(GPStime));
   newRow.setString("sysTime", str(day()) + ":" + str(hour()) + ":" + str(minute()) + ":" + str(second())+":" + str(millis()));
   newRow.setString("Lat", str(lat));
   newRow.setString("Lng", str(lng));
   newRow.setString("Alt", str(alt));
+  newRow.setString("Num_Sat", str(num_sat));
   newRow.setString("Speed_ms", str(speed_ms));
   newRow.setString("Course", str(course));
 }
@@ -72,21 +78,29 @@ void appendImuLog(){
   newRow.setString("ay", str(ay));
   newRow.setString("az", str(az));
 }
+
+void appendRadarLog(){
+  TableRow newRow = radarLog.addRow();  
+  newRow.setString("sysTime", str(day()) + ":" + str(hour()) + ":" + str(minute()) + ":" + str(second())+":" + str(millis()));
+  newRow.setString("distance", str(distance));
+  newRow.setString("angle", str(angle));
+}
   
 public void saveLog(int theValue){
   if(myPort!=null)saving();
 }
 void saving(){
   if(save_first){
+    filename = "data/" +"GPS"+ str(month()) + "-" + str(day()) + "--" + str(hour()) + "-" + str(minute()) + ".csv";
+    saveTable(gpsLog, filename);
+      
+    filename = "data/" +"IMU"+ str(month()) + "-" + str(day()) + "--" + str(hour()) + "-" + str(minute()) + ".csv";
+    saveTable(imuLog, filename);
+      
+    filename = "data/" +"Radar"+ str(month()) + "-" + str(day()) + "--" + str(hour()) + "-" + str(minute()) + ".csv";
+    saveTable(radarLog, filename);
     
-      println("[saved]");
-    
-      saveTable(gpsLog, filename);
-      filename = "data/" +"GPS"+ str(month()) + "-" + str(day()) + "--" + str(hour()) + "-" + str(minute()) + ".csv";
-
-      saveTable(imuLog, filename);
-      filename = "data/" +"IMU"+ str(month()) + "-" + str(day()) + "--" + str(hour()) + "-" + str(minute()) + ".csv";
-    
+    println("[saved]");
     //save as a table in csv format(data/table - data folder name table)  
   }
   save_first=true;

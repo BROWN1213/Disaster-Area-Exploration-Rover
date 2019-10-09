@@ -29,7 +29,7 @@ CmdMessenger cmdMessenger = CmdMessenger(Serial);
 SimpleTimer schedule_timer;
 int gps_timer_id,ahrs_timer_id,e_sensor_timer_id;
 int ultra_sonic_timer_id;
-void setup() {
+void setup(){
 
   ROVER_LOG("Start setup ");
   //Serial.begin(38400);     //MPU6050 default
@@ -55,7 +55,7 @@ void setup() {
   e_sensor_timer_id=schedule_timer.setInterval(2000, updateEnvironmentalSensor); //0.5Hz
   //ultra_sonic_timer_id=schedule_timer.setInterval(300, updateUltraSonic); //0.33Hz
   schedule_timer.setInterval(1000, heatbeat);
-  
+  RoverMotorTest();
   
   
 }

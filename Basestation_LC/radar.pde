@@ -1,4 +1,3 @@
-
 float pixsDistance;
 void setupRadar(){
   distance=0.;
