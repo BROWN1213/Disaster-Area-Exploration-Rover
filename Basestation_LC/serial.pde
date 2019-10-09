@@ -16,6 +16,8 @@ void setupSerial(){
     .setSize(200,500);    
 
   customize(menu1);
+ 
+  
   
   
 
@@ -51,14 +53,8 @@ void controlEvent(ControlEvent theControlEvent)
   { int list_num= (int)theControlEvent.controller().getValue();
     String port_name=Serial.list()[list_num];
     println(port_name);
-    myPort = new Serial(this, port_name, 115200);
+    myPort = new Serial(this, port_name, 57600);
     myPort.bufferUntil('\n');   
-    delay(1000);
-    String cmd="AT\r\n";
-    myPort.write(cmd); 
-    delay(1000);
-    cmd="ATD\r\n";
-    myPort.write(cmd);   
     
   }
   if(theControlEvent.isController())
@@ -67,20 +63,21 @@ void controlEvent(ControlEvent theControlEvent)
 
 }
 
-void reConnect(){
-    String cmd="AT\r\n";
-    myPort.write(cmd); 
-    delay(1000);
-    cmd="ATD\r\n";
-    myPort.write(cmd);  
-    delay(1000);
-}
+//void reConnect(){
+//    String cmd="AT\r\n";
+//    myPort.write(cmd); 
+//    delay(1000);
+//    cmd="ATD\r\n";
+//    myPort.write(cmd);  
+//    delay(1000);
+//}
 
 
 void serialEvent(Serial port) //Reading the datas by Processing.
 {
    String input = port.readStringUntil('\n');
-   //println(input);
+   
+   println(input);
    
    
   if(input.indexOf("%") == 0){ //header
@@ -88,17 +85,13 @@ void serialEvent(Serial port) //Reading the datas by Processing.
      //println(input);
      input = trim(input);
      String[] values = split(input, ",");
-     //values[0]: class, values[1]: num, 
+  //   //values[0]: class, values[1]: num, 
       if(int(values[0])==1){ //IMU
         roll =float(values[2]);
         pitch =float(values[3]);
         yaw =float(values[4]);
-        ax =float(values[5]);
-        ay =float(values[6]);
-        az =float(values[7]);
         
         appendImuLog();
-        
       }
       if(int(values[0])==2){  //GPS
         GPStime =float(values[2]);
@@ -111,10 +104,17 @@ void serialEvent(Serial port) //Reading the datas by Processing.
         
         appendGpsLog();
       }
-      if(int(values[0])==4){
+      if(int(values[0])==3){ //environmental
+        temp = float(values[2]);
+        humid = float(values[3]);
+        dustDensity = float(values[4]);
+        co_ppm = float(values[5]);
+      }
+      if(int(values[0])==4){  //radar
         distance=float(values[2]);
         angle=float(values[3]);
         appendRadarLog();
       }
+      
   }
 }
