@@ -82,7 +82,7 @@ void OnManualControl(){
 //     cmdMessenger.sendCmd(kAcknowledge,F("Control fail..Set manualmode first!!!")); 
 //     return;  
 //   }
-
+  
   velocity = cmdMessenger.readInt16Arg();
   radius = cmdMessenger.readInt16Arg();
 
